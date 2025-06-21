@@ -17,6 +17,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.engine('ejs',ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
+
 //jisse hamra jo data hai request ke andr aa raha hai parse ho paye 
 app.use(express.urlencoded({extended : true}));
 
@@ -33,24 +34,8 @@ const wrapasync = require("./utils/wrapasync.js");
 const ExpressError = require("./utils/ExpressError.js");
 
 
-// Update your MongoDB connection code
-main().catch(err => {
-    console.error("MongoDB connection error:", err);
-    process.exit(1); // Exit process if DB connection fails
-});
 
-async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/wandrlust');
-    console.log('Connected to MongoDB');
-}
 
-app.listen(3000, (err) => {
-  if (err) {
-    console.error("Server failed to start:", err);
-  } else {
-    console.log("Server is listening on 3000");
-  }
-});
 
 // app.use((req, res, next) => {
 //     console.log(`Incoming: ${req.method} ${req.url}`);
@@ -64,8 +49,9 @@ app.get('/', (req, res) => {
 });
 
 //index route
-app.get('/listings', wrapasync, async (req, res)=>{
+app.get('/listings', async (req, res)=>{
     const allisting = await Listing.find({});
+    console.log("sonu")
     res.render("./listings/index",{allisting});
 });
 //new route
@@ -234,3 +220,16 @@ app.get('/test', (req, res) => {
   console.log("Test route hit"); // Check terminal
   res.send("TEST WORKED"); // Check browser at http://localhost:3000/test
 });
+
+
+
+mongoose
+  .connect("mongodb://127.0.0.1:27017/wandrlust")
+  .then(() => {
+    app.listen(3000, () => {
+      console.log("Mongo is connected && Server is listening on 3000");
+    });
+  })
+  .catch(() => {
+    console.log("connection error,error");
+  });

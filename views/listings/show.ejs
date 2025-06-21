@@ -1,0 +1,69 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wanderlust</title>
+</head> -->
+<%- layout("/layouts/boilerplate.ejs") %>
+
+<div class="row mt-3">
+    <div class="col-8 offset-3">
+        <h3><%= listing.title %></h3>
+    </div>
+    <div class="card col-6 offset-3">
+        <img src="<%= listing.image.url %>" 
+        class="card-img-top" 
+        alt="listing_image">
+        <div class="card-body">
+            <!-- <p class="card-text></p> -->
+            <ul>
+                <!-- <li><%= listing.title %></li> -->
+                <li><%= listing.description %></li>
+                <li> &#8377; ₹<%= listing.price.toLocaleString("en-IN") %> /Night</li>  
+                <li><%= listing.location %></li>
+                <li><%=listing.country %></li>
+            </ul>
+            <br>
+            <a  href="/listings/<%= listing._id %>/edit" class="col-1 btn-dark "><button class="editbtn">Edit</button></a>
+            <br><br>
+            <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+                <button class=" btn btn-dark ">Delete</button>
+            </form>
+         </div>
+         <hr>
+         <div class="col-8 ">
+    <h4>Leave a Review</h4>
+    <form action="/listings/<%=listing.id %>/reviews" method="POST" novalidate class="needs-validation">
+        <div class="mb-3 mt-3">
+            <label for="rating" class="form-label">Rating</label>
+            <input type="range" min="1" max="5" id="rating" name="review[rating]" class="form-range">
+        </div> 
+        <div class="mb-3 mt-3">
+            <label for="comment" class="form-label">Comment</label>
+            <textarea cols="30" maxlength="100" id="comment" name="review[comment]" class="form-control" required ></textarea>
+            <div class="invalid-feedback">Please submit some comments</div>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+    </div>        
+</div>    
+
+    
+    <!-- <ul>
+        <li><%= listing.title %></li>
+        <li><%= listing.description %></li>
+        <li> &#8377; ₹<%= listing.price.toLocaleString("en-IN") %> /Night</li>  
+        <li><%= listing.location %></li>
+        <li><%=listing.country %></li>
+    </ul>
+    <br>
+    <a  href="/listings/<%= listing._id %>/edit">Edit This listing </a>
+    <br><br>
+    <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+        <button>Delete This Listing </button>
+    </form>
+     -->
+

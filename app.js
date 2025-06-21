@@ -60,7 +60,7 @@ app.get('/listings/new',(req, res)=>{
 })
 
 //show route
-app.get('/listings/:id',wrapasync,async (req, res)=>{
+app.get('/listings/:id',async (req, res)=>{
     let {id}= req.params;
     const listing =await Listing.findById(id);
     res.render("./listings/show",{listing});
@@ -71,7 +71,7 @@ app.get('/listings/:id',wrapasync,async (req, res)=>{
 //     await newListing.save();
 //     res.redirect("/listings");
 // });
-app.post("/listings", wrapasync, async (req, res) => {
+app.post("/listings", async (req, res) => {
     if(!req.body.listing){
         throw new ExpressError(404, "client error ");
     }

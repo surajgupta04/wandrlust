@@ -25,7 +25,10 @@ Wanderlust is a full-stack web application inspired by Airbnb, built using the *
   - Reserve homes for specific dates  
   - View booking history
 
----
+--- For run the project 
+--- use npm nodemon 
+--- npm app.js
+--- http://localhost:3000/listings
 
 ## 🧰 Tech Stack
 
